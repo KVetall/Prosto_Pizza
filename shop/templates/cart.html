@@ -1,0 +1,48 @@
+{% extends 'main.html' %}
+
+{% block title %}<title>Корзина</title>{% endblock title %}
+{%block discription %}<meta name="description" content=Корзина товаров />{% endblock discription %}
+{% block keywords%}<meta name="keywords" content=пицца, доставка пиццы, заказать пиццу/>{% endblock keywords %}
+
+{% block content %}
+  <!-- Форма корзины -->
+  <div class="conteiner text-center">
+    <div class="cart">
+      <h1>Корзина</h1>
+    {% if products %}
+      <form name="cart" action="#" method="post">
+        {% csrf_token %}
+        <div class="table-responsive">
+          <table class="table table-hover fs-3">
+          {% for product in products %}
+            <tbody>
+              <tr>
+                <td colspan="6"><img src="{{ product.image.url }}" alt="{{ product.title }}"></td>
+                <td colspan="6">{{ product.title }}</td>
+                <td colspan="6">{{ product.price }}руб</td>
+                <td colspan="6">
+                  <input type="text" name="count_{{ product.id }}" value="{{ product.count }}" readonly/>
+                </td>
+                <td colspan="6">{{ product.get_summ_price }} руб</td>
+                <td colspan="6">
+                  {% load static %}
+                  <a href="{{ request.path }}?delete_cart={{ product.id }}"><img id="x" src="{% static 'images/x.svg' %}"></a>
+                </td>
+              </tr>
+            </tbody>
+          {% endfor %}
+          </table>
+        </div>
+        <div class="fs-3">Итого: <span class="fs-2" id="total-cart-summa">{{ summ_in_cart }}</span>руб.</div>
+        <br>
+        <form action="order.html">
+          <a href="{% url 'order' %}" class="btn btn-primary fs-3" type="submit">Оформить заказ</a>
+        </form>
+      </form>
+    {% else %}
+      <p class="fs-2 fw-bold">Корзина пуста</p>
+    {% endif %}
+    </div>
+  </div>
+  <!-- Форма корзины -->
+{% endblock content %}

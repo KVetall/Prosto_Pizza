@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+
+{% block title %}<title>Страница не найдена - 404</title>{% endblock title %}
+{%block discription %}<meta name="description" content=Запрашиваемая страница не существует />{% endblock discription %}
+{% block keywords%}<meta name="keywords" content=страница не найдена, страница не существует, 404 />{% endblock keywords %}
+
+{% block content %}
+<div class="conteiner text-center">
+    <div class="order">
+        <h2>Упс!</h2>
+        <h3>Что-то пошло не так. Видимо вы ввели неправильный адрес.</h3>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'main.html' %}
+
+{% block title %}<title>Ваш заказ</title>{% endblock title %}
+{%block discription %}<meta name="description" content=Корзина товаров />{% endblock discription %}
+{% block keywords%}<meta name="keywords" content=пицца, доставка пиццы, заказать пиццу/>{% endblock keywords %}
+
+{% block content %}
+  <!-- Форма заказа -->
+  <div class="conteiner d-flex justify-content-center align-items-center ">
+    <div class="order col-6 fs-5 bg-warning bg-opacity-10">
+      <h1>Оформление заказа</h1>
+      <form name="order" action="{% url 'order' %}" method="post">
+        {% csrf_token %}
+        <table class="table">
+          <tbody>
+            <tr>
+              <th scope="row">{{ form.name.label }}:</th>
+              <td>{{ form.name }}</td>
+              <td>{{ form.name.errors }}</td>
+            </tr>
+            <tr>
+              <th scope="row">{{ form.phone_number.label }}:</th>
+              <td>{{ form.phone_number }}</td>
+              <td>{{ form.phone_number.errors }}</td>
+            </tr>
+            <tr>
+              <th scope="row">{{ form.email.label }}:</th>
+              <td>{{ form.email }}</td>
+              <td>{{ form.email.errors }}</td>
+            </tr>
+            <tr>
+              <th scope="row">{{ form.address.label }}:</th>
+              <td>{{ form.address }}</td>
+              <td>{{ form.address.errors }}</td>
+            </tr>
+            <tr>
+              <th scope="row">{{ form.notice.label }}:</th>
+              <td>{{ form.notice }}</td>
+              <td>{{ form.notice.errors }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <button type="submit" class="btn btn-primary fs-5">Оформить заказ</button>
+      </form>
+    </div>
+  </div>
+  <!-- Форма заказа -->
+{% endblock content %}

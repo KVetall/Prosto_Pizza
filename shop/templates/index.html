@@ -1,0 +1,79 @@
+{% extends 'main.html' %}
+
+{% block title %}<title>Просто Pizza</title>{% endblock title %}
+{%block discription %}<meta name="description" content=Доставка пиццы/>{% endblock discription %}
+{% block keywords%}<meta name="keywords" content=пицца, доставка пиццы, заказать пиццу/>{% endblock keywords %}
+
+{% block content %}
+<div class="conteiner list-product">
+  <div class="products">
+    <div class="pizza">
+      <h1>Пицца</h1>
+      <div class="row">
+      {% for product in products_pizza %}
+        <div class="col-sm-6 col-md-6 col-xl-3" style="margin-bottom: 24px;">
+          <div class="card">
+            <img
+              src="{{product.image}}"
+              class="card-img-top"
+              alt="{{ product.title }}"/>
+            <div class="card-body">
+              <h5 class="card-title">{{ product.title }}</h5>
+              <p class="card-text">{{ product.description }}</p>
+              <div class="card-btn d-flex">
+                <a href="{{ request.path }}?add_cart={{ product.id }}" class="btn btn-primary">Выбрать</a>
+                <p class="card-price">{{ product.price }} Р</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    <div class="rolls">
+      <h1><a name="drink"></a>Роллы</h1>
+      <div class="row">
+
+        <div class="col-sm-6 col-md-6 col-xl-3" style="margin-bottom: 24px;">
+          <div class="card">
+            <img
+              src="{{ product.image }}"
+              class="card-img-top"
+              alt="{{ product.title }}"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Меню в стадии разработки</h5>
+              <p class="card-text">{{ product.description }}</p>
+              <div class="card-btn d-flex">
+                <button type="submit" class="btn btn-primary">Выбрать</button>
+                <p class="card-price">{{ product.price }} Р</p>
+              </div>
+            </div>
+          </div>
+        </div>
+    <div class="drinks">
+      <h1><a name="drink"></a>Напитки</h1>
+      <div class="row">
+
+        <div class="col-sm-6 col-md-6 col-xl-3" style="margin-bottom: 24px;">
+          <div class="card">
+            <img
+              src="{{ product.image }}"
+              class="card-img-top"
+              alt="{{ product.title }}"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Меню в стадии разработки</h5>
+              <p class="card-text">{{ product.description }}</p>
+              <div class="card-btn d-flex">
+                <button type="submit" class="btn btn-primary">Выбрать</button>
+                <p class="card-price">{{ product.price }} Р</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

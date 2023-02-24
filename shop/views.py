@@ -1,13 +1,15 @@
 from django.http import Http404, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
-from shop.forms import OrderModelForm
+from django.views import View
+from shop.forms import OrderModelForm, ReviewsAddForm
 
 
 from shop.models import (
     Order,
     OrderList,
-    Product
+    Product,
+    Reviews
 )
 
 
@@ -115,3 +117,36 @@ def add_order(request):
         request,
         'addedorder.html'
     )
+
+
+def reviews(request):
+    objects = Reviews.objects.all()
+    return render(
+        request,
+        'reviews.html',
+        context={'objects': objects}
+    )
+
+
+class ReviewCreate(View):
+
+    def get(self, request):
+        form = ReviewsAddForm()
+        context = {'form': form}
+        return render(
+            request,
+            'reviews_add.html',
+            context
+        )
+
+    def post(self, request):
+        form = ReviewsAddForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('reviews')
+        return render(
+            request,
+            'reviews_add.html',
+            context={'form': form}
+        )

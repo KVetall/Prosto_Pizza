@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+
+{% block title %}<title>Отзывы</title>{% endblock title %}
+{%block discription %}<meta name="description" content=отзывы />{% endblock discription %}
+{% block keywords%}<meta name="keywords" content=отзывы />{% endblock keywords %}
+
+{% block content %}
+  <!-- Отзыв -->
+  <div class="conteiner col-8 align-items-center">
+    {% for field in objects %}
+      <br>
+      <table class="table table-striped fs-5 bg-white" style="margin: 0 auto; width: 80%;">
+        <tbody>
+          <tr>
+            <th scope="row">{{ field.name }}</th>
+          </tr>
+          <tr>
+            <td>
+              <p>{{ field.message }}</p>
+            </td>
+          </tr>
+          <tr>
+            <td scope="row">{{ field.date_review }}</td>
+          </tr>
+        </tbody>
+      </table>
+    {% endfor %}
+      <br>
+  </div>
+  <a href="{% url 'add_review' %}" type="submit" class="btn btn-primary fs-5">Оставить отзыв</a>
+  <!-- Отзыв -->
+{% endblock content %}

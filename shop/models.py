@@ -220,3 +220,26 @@ class Feedback(models.Model):
             f'Обращение {self.id}, {self.date_feedback}: '
             f'от {self.name} - {self.message}'
         )
+
+
+class Reviews(models.Model):
+    """Отзывы"""
+
+    email = models.EmailField(blank=True)
+    name = models.CharField(max_length=70, blank=True, verbose_name='Имя')
+    message = models.TextField(verbose_name='Сообщение')
+    date_review = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Дата отзыва'
+    )
+
+    class Meta:
+        ordering = ['-date_review']
+        verbose_name = 'Отзыв'
+        verbose_name_plural = 'Отзывы'
+
+    def __str__(self):
+        return (
+            f'Отзыв {self.id}, {self.date_review}: '
+            f'от {self.name} - {self.message}'
+        )

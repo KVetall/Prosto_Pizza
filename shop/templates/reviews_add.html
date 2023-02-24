@@ -1,0 +1,30 @@
+{% extends 'main.html' %}
+
+{% block title %}<title>Оставьте отзыв</title>{% endblock title %}
+{%block discription %}<meta name="description" content=оставить отзыв />{% endblock discription %}
+{% block keywords%}<meta name="keywords" content=отзыв, оставить отзыв />{% endblock keywords %}
+
+{% block content %}
+  <!-- Форма отзыва -->
+  <div class="conteiner d-flex justify-content-center align-items-center ">
+    <div class="reviews col-6 fs-5 bg-warning bg-opacity-10">
+      <h1>Оставьте пожалуйста Ваш отзыв</h1>
+      <form name="reviews" action="{% url 'add_review' %}" method="post">
+        {% csrf_token %}
+        {% for field in form %}
+          <div class="form-group mb-3 fw-bold">
+            {% if field.errors %}
+              <div class="alert alert-danger mb-3 fw-bold">
+                {{ field.errors }}
+              </div>
+            {% endif %}
+            {{ field.label }}
+            {{ field }}
+          </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary fs-5">Отправить отзыв</button>
+      </form>
+    </div>
+  </div>
+  <!-- Форма заказа -->
+{% endblock content %}

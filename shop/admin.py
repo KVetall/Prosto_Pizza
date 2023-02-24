@@ -8,7 +8,8 @@ from shop.models import (
                             Discount,
                             Order,
                             OrderList,
-                            Feedback
+                            Feedback,
+                            Reviews
                         )
 from shop.constants import ROUND_VALUE
 
@@ -63,7 +64,7 @@ class ProductAdmin(admin.ModelAdmin):
                 "<img src='{}' width='60' />".format(obj.image.url)
             )
         return None
-        
+
     image_show.__name__ = 'Картинка'
 
 
@@ -102,8 +103,21 @@ class OrderListAdmin(admin.ModelAdmin):
 
 
 class FeedbackListAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'email', 'message', 'date_feedback', 'status')
+    list_display = (
+        'id',
+        'name',
+        'email',
+        'message',
+        'date_feedback',
+        'status'
+    )
     list_filter = ('status',)
+    search_fields = ('id',)
+
+
+class ReviewListAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'email', 'message', 'date_review',)
+    list_filter = ('date_review',)
     search_fields = ('id',)
 
 
@@ -111,3 +125,4 @@ admin.site.register(Order, OrderAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(OrderList, OrderListAdmin)
 admin.site.register(Feedback, FeedbackListAdmin)
+admin.site.register(Reviews, ReviewListAdmin)
